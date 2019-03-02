@@ -14,14 +14,16 @@ export default class App extends Component {
         <TopNav />
         <main role="main" className="container">
           <div className="row">
-            <div className="col-4">
+            <div className="col-12">
               <div className="App">
                 <h1>Welcome to {this.state.name}</h1>
               </div>
             </div>
           </div>
         </main>
-        <MainDashboard />
+        <div className="container">
+          <MainDashboard />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import station from './stationReducer';
+import stations from './stationsReducer';
 
 export default combineReducers({
-  station,
+  stations,
 });

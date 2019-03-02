@@ -4,11 +4,13 @@ import { fetchStation } from '../../store/stationActions';
 
 class MainDashboard extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchStation());
+    console.log("Mounting component");
+    this.props.dispatch(fetchStation(9121));
+    this.props.dispatch(fetchStation(9221));
   }
 
   render() {
-    const { error, loading, lines } = this.props;
+    const { error, loading, stations } = this.props;
 
     if (error) {
       return <div>Error! {error.message}</div>;
@@ -19,19 +21,22 @@ class MainDashboard extends Component {
     }
 
     return (
-      <ul>
-          {lines.map(line => (
-            <li key={line.id}>{line.name}</li>
+      <div className="card-group">
+          {stations.map(station => (
+            <div className="card" key={station.StationId}>
+              <div className="card-body">{station.StationId}</div>
+            </div>
           ))}
-      </ul>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  lines: state.station.lines,
-  loading: state.station.loading,
-  error: state.station.error
-});
+const mapStateToProps = state => {
+  return {
+    stations: state.stations.Stations,
+    loading: state.stations.loading > 0,
+  };
+}
 
 export default connect(mapStateToProps)(MainDashboard);

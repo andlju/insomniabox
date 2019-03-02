@@ -2,43 +2,53 @@ export const FETCH_STATION_BEGIN = 'FETCH_STATION_BEGIN';
 export const FETCH_STATION_SUCCESS = 'FETCH_STATION_SUCCESS';
 export const FETCH_STATION_FAILURE = 'FETCH_STATION_FAILURE';
 
-export const fetchStationBegin = () => ({
+export const fetchStationBegin = (stationId) => ({
   type: FETCH_STATION_BEGIN,
+  payload: { StationId: stationId },
 });
 
-export const fetchStationSuccess = station => ({
+export const fetchStationSuccess = (stationId, station) => ({
     type: FETCH_STATION_SUCCESS,
-    payload: { station },
+    payload: { StationId: stationId, Station: station },
   });
 
-export const fetchStationFailure = error => ({
+export const fetchStationFailure = (stationId, error) => ({
   type: FETCH_STATION_FAILURE,
-  payload: { error },
+  payload: { StationId: stationId, error },
 });
 
-function fakeGetStation() {
+function getStation(stationId){
+  return fetch('/api/tube/stations/'+stationId);
+}
+
+function fakeGetStation(stationId) {
   return new Promise((resolve) => {
     // Resolve after a timeout so we can see the loading indicator
     setTimeout(
       () =>
         resolve({
-          station: {
-            lines: [
+          Station: {
+            StationId: stationId,
+            Metros: [
               {
-                id: 0,
-                name: 'Röda linjen mot Ropsten',
+                LineNumber: 13,
+                Destination: 'Ropsten',
+                DisplayTime: '6 min',
               },
               {
-                id: 1,
-                name: 'Röda linjen mot Norsborg',
+                LineNumber: 13,
+                Destination: 'Norsborg',
+                DisplayTime: '5 min',
               },
               {
-                id: 2,
-                name: 'Röda linjen mot Fruängen',
+                LineNumber: 13,
+                Destination: 'Ropsten',
+                DisplayTime: '12 min',
               },
               {
-                id: 3,
-                name: 'Röda linjen mot Mörby Centrum',
+                LineNumber: 13,
+                Destination: 'Alby',
+                DisplayTime: '15 min',
               },
             ],
           }
@@ -48,17 +58,16 @@ function fakeGetStation() {
   });
 }
 
-export function fetchStation() {
+export function fetchStation(stationId) {
   return (dispatch) => {
-    dispatch(fetchStationBegin());
-    return fakeGetStation()
+    dispatch(fetchStationBegin(stationId));
+    return getStation(stationId)
       .then((json) => {
-        console.log(json.station);
-        dispatch(fetchStationSuccess(json.station));
-        return json.station;
+        dispatch(fetchStationSuccess(stationId, json.Station));
+        return json.Station;
       })
       .catch(error =>
-        dispatch(fetchStationFailure(error))
+        dispatch(fetchStationFailure(stationId, error))
       );
   };
 }
