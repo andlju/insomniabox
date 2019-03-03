@@ -23,39 +23,48 @@ export default function stationReducer(state = initialState, action) {
 
       return {
         ...state,
-        Stations: [...state.Stations.filter(s => s.StationId != action.payload.StationId), newStation],
+        Stations: [...state.Stations, newStation],
         loading: state.loading + 1,
       };
 
     case FETCH_STATION_SUCCESS:
       console.log("Fetch station success", action.payload.StationId);
 
-      const updatedStation = {
-        ...state.Stations.find(s => s.StationId == action.payload.StationId),
-        Metros: action.payload.Station.Metros,
-        loading: false,
-        error: null
-      };
-
       return {
         ...state,
-        Stations: [...state.Stations.filter(s => s.StationId != action.payload.StationId), updatedStation],
-        loading: state.loading - 1,
+        Stations: state.Stations.map((item, index) => 
+          {
+            if (item.StationId !== action.payload.StationId) {
+              return item;
+            }
+            return {
+              ...item,
+              ...action.payload.Station,
+              loading: false,
+              error: null
+            }
+          }),
+          loading: state.loading - 1,
       };
 
     case FETCH_STATION_FAILURE:
       console.log("Fetch station failure", action.payload.StationId, action.payload.error);
-      const failedStation = {
-        ...state.Stations.find(s => s.StationId == action.payload.StationId),
-        Metros: [],
-        loading: false,
-        error: action.payload.error
-      };
 
       return {
         ...state,
-        Stations: [...state.Stations.filter(s => s.StationId != action.payload.StationId), failedStation],
-        loading: state.loading - 1
+        Stations: state.Stations.map((item, index) => 
+          {
+            if (item.StationId !== action.payload.StationId) {
+              return item;
+            }
+            return {
+                ...item,
+                Metros: [],
+                loading: false,
+                error: action.payload.error,
+            }
+          }),
+          loading: state.loading - 1
       };
 
     default:

@@ -25,6 +25,7 @@
     "@neutrinojs/airbnb": "^8.3.0",
     "@neutrinojs/jest": "^8.3.0",
     "@neutrinojs/react": "^8.3.0",
+    "dotenv": "^6.2.0",
     "neutrino": "^8.3.0"
   }
 }

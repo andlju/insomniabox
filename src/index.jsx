@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-// import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -7,11 +7,14 @@ import store from './store';
 import App from './App';
 
 const root = document.getElementById('root');
+console.log("Using API url: ", process.env.API_BASE_URL);
 const load = () => render(
   (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AppContainer>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </AppContainer>
   ), root,
 );
 

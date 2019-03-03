@@ -13,17 +13,8 @@ export default class App extends Component {
       <div>
         <TopNav />
         <main role="main" className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="App">
-                <h1>Welcome to {this.state.name}</h1>
-              </div>
-            </div>
-          </div>
-        </main>
-        <div className="container">
           <MainDashboard />
-        </div>
+        </main>
       </div>
     );
   }
