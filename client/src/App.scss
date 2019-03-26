@@ -1,0 +1,11 @@
+@import "themes/lux/_variables";
+@import "~bootstrap/scss/bootstrap";
+@import "themes/lux/_bootswatch";
+
+body {
+  padding-top: 6rem;
+}
+
+main {
+  height: 100vh;
+}

@@ -67,7 +67,7 @@ function fakeGetStation(stationId, directions) {
             ],
           }
         }),
-      1000,
+      Math.random() * 2000,
     );
   });
 }

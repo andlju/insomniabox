@@ -12,7 +12,6 @@ const initialState = {
 export default function stationReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_STATION_BEGIN:
-      console.log("Fetch station begin", action.payload.StationId);
 
       const newStation = {
         Metros: [],
@@ -28,7 +27,6 @@ export default function stationReducer(state = initialState, action) {
       };
 
     case FETCH_STATION_SUCCESS:
-      console.log("Fetch station success", action.payload.StationId);
 
       return {
         ...state,
@@ -48,7 +46,6 @@ export default function stationReducer(state = initialState, action) {
       };
 
     case FETCH_STATION_FAILURE:
-      console.log("Fetch station failure", action.payload.StationId, action.payload.error);
 
       return {
         ...state,
