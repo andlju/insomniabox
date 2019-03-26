@@ -1,7 +1,16 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStation } from '../../store/stationActions';
 import StationInfo from './StationInfo';
+import posed from 'react-pose';
+
+const Container = posed.div({
+  enter: { staggerChildren: 50 }
+});
+
+const Child = posed.div({
+  enter: { y: 0, opacity: 1 },
+  exit: { y: 50, opacity: 0 }
+});
 
 class StationDashboard extends Component {
 
@@ -13,11 +22,14 @@ class StationDashboard extends Component {
     }
 
     return (
-      <div className="card-deck">
-      {stations.map(station => 
-          <StationInfo key={station.StationId} stationId={station.StationId} />
-          )}
-      </div>
+      <Container>
+        <div className="card-deck">
+          {stations.map(station =>
+              <Child key={station.StationId} className="card" >
+                  <StationInfo stationId={station.StationId}/>
+              </Child>)}
+        </div>
+      </Container>
     );
   }
 }

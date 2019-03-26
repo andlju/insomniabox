@@ -27,7 +27,10 @@ class App extends Component {
 
   render() {
     return (<Route render={({ location }) =>
-      (
+    {
+      location.key = location.key ? location.key : 'tada';
+      console.log("location:", location);
+      return (
         <div>
           <TopNav />
           <main role="main" className="container-fluid">
@@ -40,7 +43,7 @@ class App extends Component {
               </RouteContainer>
             </PoseGroup>
           </main>
-        </div>)} />);
+        </div>)}} />);
   }
 }
 

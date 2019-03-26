@@ -11,15 +11,12 @@ class StationInfo extends Component {
     }
     if(loading) {
       return (
-        <div className="card">
           <div className="card-body">
             <h5 className="card-title">Loading</h5>
-          </div>
-        </div>)
+          </div>)
     }
 
     return (
-      <div className="card">
         <div className="card-body">
           <h5 className="card-title">{station.StationName}</h5>
           <table className="table table-sm table-striped table-borderless">
@@ -41,7 +38,7 @@ class StationInfo extends Component {
             </tbody>
           </table>
         </div>
-      </div>)
+      )
   }
 }
 
