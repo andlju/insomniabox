@@ -18,6 +18,7 @@ module.exports = {
         .plugin('env')
         .use(EnvironmentPlugin, [{
           API_BASE_URL: 'http://localhost:3000',
+          USE_FAKE: true
         }]);
     }  ]
 };

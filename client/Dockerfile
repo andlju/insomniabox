@@ -1,9 +1,11 @@
 FROM node as builder
+ENV API_BASE_URL /api
 WORKDIR /app
 COPY package.json .
-RUN npm install
+COPY yarn.lock .
+RUN yarn
 COPY . .
-RUN npm run build
+RUN yarn run build
 
 FROM nginx
 COPY --from=builder /app/build /usr/share/nginx/html

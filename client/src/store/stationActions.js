@@ -8,9 +8,9 @@ export const fetchStationBegin = (stationId) => ({
 });
 
 export const fetchStationSuccess = (stationId, station) => ({
-    type: FETCH_STATION_SUCCESS,
-    payload: { StationId: stationId, Station: station },
-  });
+  type: FETCH_STATION_SUCCESS,
+  payload: { StationId: stationId, Station: station },
+});
 
 export const fetchStationFailure = (stationId, error) => ({
   type: FETCH_STATION_FAILURE,
@@ -18,8 +18,12 @@ export const fetchStationFailure = (stationId, error) => ({
 });
 
 const API_BASE_URL = process.env.API_BASE_URL;
+const USE_FAKE = process.env.USE_FAKE;
 
-function getStation(stationId, directions){
+function getStation(stationId, directions) {
+  if (USE_FAKE) {
+    return fakeGetStation(stationId, directions);    
+  }
   return fetch(API_BASE_URL + '/tube/stations/' + stationId).then(resp => resp.json());
 }
 
