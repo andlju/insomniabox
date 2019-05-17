@@ -29,18 +29,18 @@ class App extends Component {
   render() {
     return (<Route render={({ location }) =>
     {
-      location.key = location.key ? location.key : 'tada';
+      //location.key = location.key ? location.key : 'tada';
 
       return (
         <div>
           <TopNav />
           <main role="main" className="container-fluid">
             <PoseGroup>
-              <RouteContainer key={location.key}>
+              <RouteContainer key="mainContainer">
                 <Switch location={location}>
-                  <Route exact path="/" component={Main} key="main" />
-                  <Route path="/about" component={About} key="about" />
-                  <Route path="/stations/:direction" component={StationDashboard} key="stations" />
+                  <Route exact path="/" component={Main} />
+                  <Route path="/about" component={About} />
+                  <Route exact path="/stations/:direction" component={StationDashboard} />
                 </Switch>
               </RouteContainer>
             </PoseGroup>

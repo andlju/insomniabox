@@ -14,14 +14,13 @@ const Child = posed.div({
 
 class StationDashboard extends Component {
   
-  constructor({match}) {
+  constructor() {
     super();
-    this.direction = match.params.direction.toUpperCase();
   }
 
   render() {
     const { error, loading, stations } = this.props;
-
+    const direction = this.props.match.params.direction.toUpperCase();
     if (error) {
       return <div>Error! {error.message}</div>;
     }
@@ -29,8 +28,8 @@ class StationDashboard extends Component {
     return (
       <Container>
         <div className="card-deck">
-          {stations.filter(station => station.GroupName.toUpperCase() === this.direction).map(station =>
-              <Child key={station.StationId} className="card" >
+          {stations.filter(station => station.GroupName.toUpperCase() === direction).map(station =>
+              <Child key={station.StationId} className="card">
                   <StationInfo stationId={station.StationId}/>
               </Child>)}
         </div>
