@@ -39,6 +39,7 @@ function fakeGetStation(stationId, directions) {
               {
                 LineNumber: 13,
                 Destination: 'Ropsten',
+                StopAreaName: 'Axelsberg',
                 DisplayTime: '6 min',
                 JourneyNumber: stationId + 1,
                 JourneyDirection: 1,
@@ -46,6 +47,7 @@ function fakeGetStation(stationId, directions) {
               {
                 LineNumber: 13,
                 Destination: 'Norsborg',
+                StopAreaName: 'Axelsberg',
                 DisplayTime: '5 min',
                 JourneyNumber: stationId + 2,
                 JourneyDirection: 2,
@@ -53,6 +55,7 @@ function fakeGetStation(stationId, directions) {
               {
                 LineNumber: 13,
                 Destination: 'Ropsten',
+                StopAreaName: 'Axelsberg',
                 DisplayTime: '12 min',
                 JourneyNumber: stationId + 3,
                 JourneyDirection: 1,
@@ -60,6 +63,7 @@ function fakeGetStation(stationId, directions) {
               {
                 LineNumber: 13,
                 Destination: 'Alby',
+                StopAreaName: 'Axelsberg',
                 DisplayTime: '15 min',
                 JourneyNumber: stationId + 4,
                 JourneyDirection: 2,
@@ -74,12 +78,15 @@ function fakeGetStation(stationId, directions) {
 
 export function fetchStation(stationId, groupName, stationName, directions) {
   return (dispatch) => {
+    // Set initial state
     dispatch(fetchStationBegin(stationId, groupName));
+    // Kick off the backend call
     return getStation(stationId, directions)
       .then((json) => {
         json.Station.StationId = stationId;
         json.Station.StationName = stationName;
-        json.Station.Metros = json.Station.Metros.filter(metro => directions.includes(metro.JourneyDirection));
+        json.Station.Metros = directions.map(d => json.Station.Metros.filter(m => m.JourneyDirection === d)).flat();
+                
         dispatch(fetchStationSuccess(stationId, json.Station));
         return json;
       })

@@ -20,17 +20,15 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(fetchStation(9291, 'Northbound', 'Axelsberg', [1]));
-    this.props.dispatch(fetchStation(9262, 'Northbound', 'Hägerstensåsen', [1]));
-    this.props.dispatch(fetchStation(9290, 'Southbound', 'Mälarhöjden', [2]));
-    this.props.dispatch(fetchStation(9261, 'Southbound', 'Västertorp', [2]));
+    this.props.dispatch(fetchStation(9291, 'Northbound', 'Axelsberg', [1,2]));
+    this.props.dispatch(fetchStation(9262, 'Northbound', 'Hägerstensåsen', [1,2]));
+    this.props.dispatch(fetchStation(9290, 'Southbound', 'Mälarhöjden', [2,1]));
+    this.props.dispatch(fetchStation(9261, 'Southbound', 'Västertorp', [2,1]));
   }
 
   render() {
     return (<Route render={({ location }) =>
     {
-      //location.key = location.key ? location.key : 'tada';
-
       return (
         <div>
           <TopNav />

@@ -22,14 +22,7 @@ class StationInfo extends Component {
           <table className="table table-sm table-striped table-borderless">
             <tbody>
             {
-              station.Metros.filter(metro => metro.JourneyDirection == 1).map(metro => (
-                <tr key={metro.JourneyNumber}>
-                  <td>{metro.DisplayTime}</td><td>{metro.Destination}</td>
-                </tr>
-              ))
-            }
-            {
-              station.Metros.filter(metro => metro.JourneyDirection == 2).map(metro => (
+              station.Metros.map(metro => (
                 <tr key={metro.JourneyNumber}>
                   <td>{metro.DisplayTime}</td><td>{metro.Destination}</td>
                 </tr>

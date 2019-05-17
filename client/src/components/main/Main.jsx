@@ -77,7 +77,7 @@ class Main extends Component {
       return (
         <table className="table table-sm table-striped table-borderless">
         <tbody>
-          {direction.map(metro => <tr key={metro.JourneyNumber}><td>{metro.Destination}</td><td>{metro.DisplayTime}</td></tr>)}
+          {direction.map(metro => <tr key={metro.JourneyNumber}><td>{metro.StopAreaName}</td><td>{metro.Destination}</td><td>{metro.DisplayTime}</td></tr>)}
         </tbody>
         </table>);
         }

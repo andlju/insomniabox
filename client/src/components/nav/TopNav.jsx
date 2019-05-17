@@ -16,8 +16,8 @@ export default class TopNav extends Component {
     
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav">
-          <li className="nav-item"><Link className="nav-link" to="/stations/northbound">Northbound</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/stations/southbound">Southbound</Link></li>
+          <li className="nav-item"><Link className="nav-link" to="/stations/northbound">Norrut</Link></li>
+          <li className="nav-item"><Link className="nav-link" to="/stations/southbound">Söderut</Link></li>
           </ul>
         </div>
       </nav>
