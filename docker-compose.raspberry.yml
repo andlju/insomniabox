@@ -1,14 +1,14 @@
 version: '2'
 services:
   insomniaboxclient:
-    image: insomniabox-client
+    build: ./client/Dockerfile.raspberry
     environment:
       - API_BASE_URL=/api
       - USE_FAKE=false
     # ports:
       #- "5001:80"
   insomniaboxserver:
-    image: insomniabox-server
+    build: ./server/Dockerfile.raspberry
     environment:
       - PORT=80
     env_file:
@@ -16,6 +16,6 @@ services:
     # ports:
       # - "5000:80"
   proxy:
-    image: insomniabox-nginx
+    build: ./nginx/Dockerfile.raspberry
     ports:
       - "8080:80"
