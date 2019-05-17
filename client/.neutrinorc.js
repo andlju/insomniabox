@@ -17,8 +17,8 @@ module.exports = {
       neutrino.config
         .plugin('env')
         .use(EnvironmentPlugin, [{
-          API_BASE_URL: 'http://localhost:3000',
-          USE_FAKE: true
+          API_BASE_URL: '/api',
+          USE_FAKE: false
         }]);
     },
     ['@neutrinojs/style-loader', {

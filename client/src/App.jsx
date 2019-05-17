@@ -5,11 +5,12 @@ import { fetchStation } from './store/stationActions';
 import posed, { PoseGroup } from 'react-pose';
 
 import TopNav from './components/nav/TopNav';
+import Main from './components/main/Main';
 import StationDashboard from './components/sl-dashboard/StationDashboard';
 import './App.scss';
 
 const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 300, beforeChildren: true },
+  enter: { opacity: 1, delay: 200, beforeChildren: true },
   exit: { opacity: 0 }
 });
 
@@ -19,17 +20,17 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(fetchStation(9291, 'Axelsberg', [1]));
-    this.props.dispatch(fetchStation(9262, 'Hägerstensåsen', [1]));
-    this.props.dispatch(fetchStation(9290, 'Mälarhöjden', [2]));
-    this.props.dispatch(fetchStation(9261, 'Västertorp', [2]));
+    this.props.dispatch(fetchStation(9291, 'Northbound', 'Axelsberg', [1]));
+    this.props.dispatch(fetchStation(9262, 'Northbound', 'Hägerstensåsen', [1]));
+    this.props.dispatch(fetchStation(9290, 'Southbound', 'Mälarhöjden', [2]));
+    this.props.dispatch(fetchStation(9261, 'Southbound', 'Västertorp', [2]));
   }
 
   render() {
     return (<Route render={({ location }) =>
     {
       location.key = location.key ? location.key : 'tada';
-      console.log("location:", location);
+
       return (
         <div>
           <TopNav />
@@ -37,8 +38,9 @@ class App extends Component {
             <PoseGroup>
               <RouteContainer key={location.key}>
                 <Switch location={location}>
-                  <Route exact path="/" component={About} key="about" />
-                  <Route path="/stations" component={StationDashboard} key="stations" />
+                  <Route exact path="/" component={Main} key="main" />
+                  <Route path="/about" component={About} key="about" />
+                  <Route path="/stations/:direction" component={StationDashboard} key="stations" />
                 </Switch>
               </RouteContainer>
             </PoseGroup>

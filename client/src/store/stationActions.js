@@ -2,9 +2,9 @@ export const FETCH_STATION_BEGIN = 'FETCH_STATION_BEGIN';
 export const FETCH_STATION_SUCCESS = 'FETCH_STATION_SUCCESS';
 export const FETCH_STATION_FAILURE = 'FETCH_STATION_FAILURE';
 
-export const fetchStationBegin = (stationId) => ({
+export const fetchStationBegin = (stationId, groupName) => ({
   type: FETCH_STATION_BEGIN,
-  payload: { StationId: stationId },
+  payload: { StationId: stationId, GroupName: groupName },
 });
 
 export const fetchStationSuccess = (stationId, station) => ({
@@ -40,28 +40,28 @@ function fakeGetStation(stationId, directions) {
                 LineNumber: 13,
                 Destination: 'Ropsten',
                 DisplayTime: '6 min',
-                JourneyNumber: 1,
+                JourneyNumber: stationId + 1,
                 JourneyDirection: 1,
               },
               {
                 LineNumber: 13,
                 Destination: 'Norsborg',
                 DisplayTime: '5 min',
-                JourneyNumber: 2,
+                JourneyNumber: stationId + 2,
                 JourneyDirection: 2,
               },
               {
                 LineNumber: 13,
                 Destination: 'Ropsten',
                 DisplayTime: '12 min',
-                JourneyNumber: 3,
+                JourneyNumber: stationId + 3,
                 JourneyDirection: 1,
               },
               {
                 LineNumber: 13,
                 Destination: 'Alby',
                 DisplayTime: '15 min',
-                JourneyNumber: 4,
+                JourneyNumber: stationId + 4,
                 JourneyDirection: 2,
               },
             ],
@@ -72,9 +72,9 @@ function fakeGetStation(stationId, directions) {
   });
 }
 
-export function fetchStation(stationId, stationName, directions) {
+export function fetchStation(stationId, groupName, stationName, directions) {
   return (dispatch) => {
-    dispatch(fetchStationBegin(stationId));
+    dispatch(fetchStationBegin(stationId, groupName));
     return getStation(stationId, directions)
       .then((json) => {
         json.Station.StationId = stationId;

@@ -27,7 +27,7 @@ app.get('/tube/stations', (req, res) => {
         });
 });
 
-app.get('/tube/stations/:stationId', (req, res) => {
+app.get('/tube/stations/:stationId/realtime', (req, res) => {
     const stationId = req.params.stationId;
     axios.get(SL_REALTIME_URL + `&siteId=${stationId}`)
         .then(response => {

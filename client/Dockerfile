@@ -1,5 +1,6 @@
 FROM node as builder
-ENV API_BASE_URL /api
+#ENV API_BASE_URL /api
+#ENV USE_FAKE false
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .

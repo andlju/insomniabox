@@ -4,6 +4,7 @@ services:
     build: ./client
     environment:
       - API_BASE_URL=/api
+      - USE_FAKE=false
     # ports:
       #- "5001:80"
   insomniaboxserver:

@@ -1,0 +1,7 @@
+### Find station
+GET http://localhost:3000/tube/stations?name=Hägerstensåsen
+Accept: application/json
+
+### Get metro
+GET http://localhost:3000/tube/stations/9262
+Accept: application/json

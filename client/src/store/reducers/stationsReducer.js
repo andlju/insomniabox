@@ -16,6 +16,7 @@ export default function stationReducer(state = initialState, action) {
       const newStation = {
         Metros: [],
         StationId: action.payload.StationId,
+        GroupName: action.payload.GroupName,
         loading: true,
         error: null
       };
