@@ -1,3 +1,4 @@
+import 'array-flat-polyfill';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';

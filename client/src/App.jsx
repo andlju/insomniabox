@@ -27,8 +27,6 @@ class App extends Component {
   }
 
   render() {
-    return (<Route render={({ location }) =>
-    {
       return (
         <div>
           <TopNav />
@@ -43,8 +41,7 @@ class App extends Component {
               </RouteContainer>
             </PoseGroup>
           </main>
-        </div>)}} />);
-  }
+        </div>)};
 }
 
 function About() {

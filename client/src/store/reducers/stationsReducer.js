@@ -10,6 +10,7 @@ const initialState = {
 };
 
 export default function stationReducer(state = initialState, action) {
+  console.log("Success action", action);
   switch (action.type) {
     case FETCH_STATION_BEGIN:
 
@@ -28,7 +29,6 @@ export default function stationReducer(state = initialState, action) {
       };
 
     case FETCH_STATION_SUCCESS:
-
       return {
         ...state,
         Stations: state.Stations.map((item, index) => 
