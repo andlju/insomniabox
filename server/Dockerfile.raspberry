@@ -1,8 +1,20 @@
-FROM arm32v7/node
+FROM node as builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 RUN yarn
+
+# Add the files to arm image
+FROM arm32v7/node
+RUN mkdir /app
+# WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Same as earlier, be specific or copy everything
+ADD . /app
+
+COPY --from=builder /app/node_modules /app/node_modules
 COPY server.js .
+
 EXPOSE 80
 CMD ["node", "server.js"]

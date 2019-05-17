@@ -1,4 +1,4 @@
-FROM arm32v7/node as builder
+FROM node as builder
 #ENV API_BASE_URL /api
 #ENV USE_FAKE false
 WORKDIR /app
