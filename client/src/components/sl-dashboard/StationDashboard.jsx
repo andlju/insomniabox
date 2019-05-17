@@ -14,13 +14,11 @@ const Child = posed.div({
 
 class StationDashboard extends Component {
   
-  constructor() {
-    super();
-  }
-
   render() {
-    const { error, loading, stations } = this.props;
-    const direction = this.props.match.params.direction.toUpperCase();
+    const { error, loading, stations, match } = this.props;
+    
+    const direction = match.params.direction.toUpperCase();
+
     if (error) {
       return <div>Error! {error.message}</div>;
     }

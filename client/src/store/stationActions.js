@@ -24,7 +24,7 @@ function getStation(stationId, directions) {
   if (USE_FAKE) {
     return fakeGetStation(stationId, directions);    
   }
-  return fetch(API_BASE_URL + '/tube/stations/' + stationId).then(resp => resp.json());
+  return fetch(API_BASE_URL + '/tube/stations/' + stationId + "/realtime").then(resp => resp.json());
 }
 
 function fakeGetStation(stationId, directions) {

@@ -40,7 +40,7 @@ class App extends Component {
                 <Switch location={location}>
                   <Route exact path="/" component={Main} />
                   <Route path="/about" component={About} />
-                  <Route exact path="/stations/:direction" component={StationDashboard} />
+                  <Route path="/stations/:direction" component={StationDashboard} />
                 </Switch>
               </RouteContainer>
             </PoseGroup>

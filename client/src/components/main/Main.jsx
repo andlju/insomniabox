@@ -57,7 +57,7 @@ class Main extends Component {
   }
   
   const mapStateToProps = state => {
-      return { 
+    return { 
         loading: state.stations.loading > 0,
         nextSouthbound: getNextForDirection(state.stations, 'Southbound'),
         nextNorthbound: getNextForDirection(state.stations, 'Northbound'),
@@ -70,17 +70,17 @@ class Main extends Component {
     return firstMetros;
   }
 
-  function NextDestination({direction}) {
-    return {
-      render: () => {
-        return (
-          <table className="table table-sm table-striped table-borderless">
-          <tbody>
-            {direction.map(metro => <tr key={metro.JourneyNumber}><td>{metro.Destination}</td><td>{metro.DisplayTime}</td></tr>)}
-          </tbody>
-          </table>);
-      }
-    }
+  class NextDestination extends Component {
+    render() {
+      const {direction} = this.props;
+
+      return (
+        <table className="table table-sm table-striped table-borderless">
+        <tbody>
+          {direction.map(metro => <tr key={metro.JourneyNumber}><td>{metro.Destination}</td><td>{metro.DisplayTime}</td></tr>)}
+        </tbody>
+        </table>);
+        }
   }
 
   export default connect(mapStateToProps)(Main);
