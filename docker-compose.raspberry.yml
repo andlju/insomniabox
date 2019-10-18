@@ -12,5 +12,8 @@ services:
 
   proxy:
     image: insomniabox-nginx
+    depends_on:
+      - insomniaboxclient
+      - insomniaboxserver
     ports:
       - "8080:80"

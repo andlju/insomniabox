@@ -1,7 +1,7 @@
 FROM node as builder
-ARG USE_FAKE=true
+ARG USE_FAKE=false
 ARG API_BASE_URL=/api
-ARG RELOAD_INTERVAL=10
+ARG RELOAD_INTERVAL=60
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
