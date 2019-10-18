@@ -1,39 +1,36 @@
 {
-  "name": "insomniabox",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "build": "neutrino build",
-    "start": "neutrino start",
-    "lint": "neutrino lint",
-    "test": "neutrino test"
-  },
+  "name": "insomniabox-client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "@neutrinojs/style-loader": "^8.3.0",
-    "array-flat-polyfill": "^1.0.1",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.3.1",
     "node-sass": "^4.12.0",
-    "popper.js": "^1.14.7",
-    "postcss-loader": "^3.0.0",
-    "promise-polyfill": "^8.1.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "react-hot-loader": "^3.1.3",
-    "react-pose": "^4.0.8",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^5.0.0",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "sass-loader": "^7.1.0"
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4"
   },
-  "devDependencies": {
-    "@neutrinojs/airbnb": "^8.3.0",
-    "@neutrinojs/jest": "^8.3.0",
-    "@neutrinojs/react": "^8.3.0",
-    "dotenv": "^6.2.0",
-    "neutrino": "^8.3.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,15 +1,5 @@
-@import "themes/lux/_variables";
 @import "~bootstrap/scss/bootstrap";
-@import "themes/lux/_bootswatch";
 
-body {
-  padding-top: 6rem;
-}
-
-main {
-  height: 100vh;
-}
-
-.card-deck a:hover {
-  text-decoration: none;
+.App {
+    margin-top: 4rem;
 }
