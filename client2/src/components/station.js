@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card, Table, Button } from 'react-bootstrap';
 
 function Station(props) {
     const station = useSelector(state => state.stations.find(st => st.StationId === props.StationId));
+    const selectCallback = props.onSelect;
+
     return (
         <Card>
             <Card.Body>
@@ -17,6 +19,7 @@ function Station(props) {
                         {station.Metros.slice(0,4).map(m => <Metro Metro={m} key={m.JourneyNumber}/>)}
                     </tbody>
                 </Table>
+                <Button variant="info" size="md" className="stretched-link w-100" onClick={() => selectCallback(station.StationId)}>Visa</Button>
             </Card.Body>
         </Card>
     );

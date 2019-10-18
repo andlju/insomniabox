@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, CardDeck } from 'react-bootstrap';
 import { fetchStation } from './store/stationActions';
@@ -6,6 +6,7 @@ import { fetchStation } from './store/stationActions';
 import './App.scss';
 
 import Station from './components/station.js';
+import StationDetail from './components/stationDetail.js';
 
 const RELOAD_INTERVAL = process.env.REACT_APP_RELOAD_INTERVAL || 60;
 console.log('Using a reload interval of', RELOAD_INTERVAL);
@@ -33,11 +34,14 @@ function App() {
     reloadAll();
   }, [reloadAll]);
 
+  const [selectedStation, setSelectedStation] = useState(true);
+
   return (
     <div className="App container-fluid">
       <CardDeck>
-        {stations.map(s => <Station StationId={s.StationId} key={s.StationId} />)}
+        {stations.map(s => <Station StationId={s.StationId} key={s.StationId} onSelect={setSelectedStation} />)}
       </CardDeck>
+        {selectedStation ? <StationDetail StationId={selectedStation} onHide={() => setSelectedStation(null)}/> : '' }      
     </div>
   );
 }
