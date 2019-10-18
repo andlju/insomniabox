@@ -2,21 +2,19 @@ version: '2'
 services:
   insomniaboxclient:
     build: 
-      context: ./client2
+      context: ./client
       args:
         API_BASE_URL: '/api'
         USE_FAKE: 'false'
         RELOAD_INTERVAL: 60
-    # ports:
-      #- "5001:80"
+
   insomniaboxserver:
     build: ./server
     environment:
       - PORT=80
     env_file:
       - ./server/.env
-    # ports:
-      # - "5000:80"
+
   proxy:
     build: ./nginx
     ports:

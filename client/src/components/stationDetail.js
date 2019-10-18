@@ -9,7 +9,7 @@ function StationDetail(props) {
     if (!station)
         return (<div></div>);
     return (
-        <Modal show={true} onHide={hideCallback}>
+        <Modal show={true} onHide={hideCallback} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title id="example-custom-modal-styling-title">
                     <span>{station.Name}</span>
@@ -34,6 +34,7 @@ function Metro(props) {
         <tr className={metro.Deviations ? 'table-danger' : ''}>
             <td>{metro.DisplayTime}</td>
             <td>{metro.Destination}</td>
+            <td>{metro.Deviations ? <span>{metro.Deviations[0].Text}</span> : ''}</td>
         </tr>
     );
 }

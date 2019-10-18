@@ -4,23 +4,27 @@ const initialState = [
     {
         "Name": "Hägerstensåsen",
         "StationId": 9262,
+        "DirectionFilter": 1,
         "Metros": [
         ]
     },
     {
         "Name": "Axelsberg",
         "StationId": 9291,
+        "DirectionFilter": 1,
         "Metros": [
         ]
     },
     {
         "Name": "Västertorp",
         "StationId": 9261,
+        "DirectionFilter": 2,
         "Metros": [
         ]
     },
     {
         "Name": "Mälarhöjden",
+        "DirectionFilter": 2,
         "StationId": 9290,
         "Metros": [
         ]
@@ -43,7 +47,7 @@ function stations(state = initialState, action) {
             return state.map((station, idx) => {
                 if (station.StationId === action.StationId) {
                     return {
-                        ...station, Loading: false, Metros: action.Metros
+                        ...station, Loading: false, Metros: action.Metros.filter(m => m.JourneyDirection === station.DirectionFilter)
                     }
                 }
                 return station;
