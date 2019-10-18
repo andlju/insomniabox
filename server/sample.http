@@ -1,7 +1,13 @@
 ### Find station
-GET http://localhost:3000/tube/stations?name=Hägerstensåsen
+GET http://localhost:3001/tube/stations?name=Mälarhöjden
 Accept: application/json
 
 ### Get metro
-GET http://localhost:3000/tube/stations/9262
+GET http://localhost:3001/tube/stations/9262/realtime
 Accept: application/json
+
+### Test
+GET http://localhost:3001/test
+Accept: application/json
+
+

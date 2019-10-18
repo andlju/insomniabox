@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const SL_STATIONS_KEY = process.env.SL_STATIONS_KEY;
 const SL_REALTIME_KEY = process.env.SL_REALTIME_KEY;
@@ -16,29 +16,36 @@ const SL_REALTIME_URL = `https://api.sl.se/api2/realtimedeparturesV4.json?key=${
 
 app.use(cors());
 
+app.get('/test', (req, res) => {
+  res.send('Hello');
+});
+
 app.get('/tube/stations', (req, res) => {
-    const searchString = req.query.name;
+  console.log("Stations");
+  const searchString = req.query.name;
     axios.get(SL_STATIONS_URL + `&searchstring=${searchString}`)
         .then(response => {
             res.send({Stations:response.data.ResponseData});
         })
         .catch(error => {
-          console.log(error);
+          console.log('Error', error);
         });
 });
 
 app.get('/tube/stations/:stationId/realtime', (req, res) => {
+    console.log("Station");
     const stationId = req.params.stationId;
     axios.get(SL_REALTIME_URL + `&siteId=${stationId}`)
         .then(response => {
             res.send({Station:response.data.ResponseData});
         })
         .catch(error => {
-          console.log(error);
+          console.log('Error', error);
         });
 });
 
-console.log(`Server now listening on port ${port}`);
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server is now listening on port ${port}`);
+});
 

@@ -1,10 +1,12 @@
 version: '2'
 services:
   insomniaboxclient:
-    build: ./client
-    environment:
-      - API_BASE_URL=/api
-      - USE_FAKE=false
+    build: 
+      context: ./client2
+      args:
+        API_BASE_URL: '/api'
+        USE_FAKE: 'false'
+        RELOAD_INTERVAL: 60
     # ports:
       #- "5001:80"
   insomniaboxserver:
