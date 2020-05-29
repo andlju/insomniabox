@@ -8,7 +8,8 @@ function AppNavigation() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Tunnelbana</Nav.Link>
+                    <Nav.Link href="/">Tunnelbana</Nav.Link> 
+                    <Nav.Link href="/weather" >väder</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
