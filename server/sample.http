@@ -1,5 +1,7 @@
+@host = localhost:80
+
 ### Find station
-GET http://localhost:3000/tube/stations?name=Hägerstensåsen
+GET http://{{host}}/tube/stations?name=Hägerstensåsen
 Accept: application/json
 
 ### Get metro
