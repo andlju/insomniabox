@@ -7,6 +7,7 @@ import { startLoadingStations, stopLoadingStations, loadStations } from '../comp
 import { RootState, wrapper } from '../store';
 import { NextPage } from 'next';
 import { bindActionCreators } from 'redux';
+import { getAllStationIds } from '../components/stations/stations.selectors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const useAllStationIds = () => {
-  return useSelector<RootState, string[]>(
-    (state) => state.stations.stations.map(s => s.stationId));
+  return useSelector<RootState, string[]>(getAllStationIds());
 };
 
 

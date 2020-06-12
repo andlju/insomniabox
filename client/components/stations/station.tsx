@@ -4,14 +4,14 @@ import { MoreVert } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
 import { StationsState, StationModel } from './stations.model';
 import { RootState } from '../../store';
+import { getStation } from './stations.selectors';
 
 export interface StationProps {
   stationId: string
 };
 
 const useStation = (stationId) => {
-  return useSelector<RootState, StationModel>(
-    (state) => state.stations.stations.find(s => s.stationId === stationId));
+  return useSelector<RootState, StationModel>(getStation(stationId));
 };
 
 export default function Station({ stationId }: StationProps) {
