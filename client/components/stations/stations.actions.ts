@@ -14,7 +14,10 @@ export interface StopLoadingStationsAction {
 };
 
 export interface LoadStationsAction {
-  type: typeof LOAD_STATIONS
+  type: typeof LOAD_STATIONS,
+  payload: {
+    isServer: boolean
+  }
 };
 
 export interface LoadStationsSuccessAction {
@@ -22,27 +25,30 @@ export interface LoadStationsSuccessAction {
   payload: StationModel[]
 };
 
-export type StationAction = LoadStationsAction | LoadStationsSuccessAction | StartLoadingStationsAction | StopLoadingStationsAction;
+export type StationsAction = LoadStationsAction | LoadStationsSuccessAction | StartLoadingStationsAction | StopLoadingStationsAction;
 
-export function startLoadingStations(): StationAction {
+export function startLoadingStations(): StationsAction {
   return {
     type: START_LOADING_STATIONS
   }
 };
 
-export function stopLoadingStations(): StationAction {
+export function stopLoadingStations(): StationsAction {
   return {
     type: STOP_LOADING_STATIONS
   }
 };
 
-export function loadStations() : StationAction {
+export function loadStations(isServer: boolean) : StationsAction {
   return {
-    type: LOAD_STATIONS
+    type: LOAD_STATIONS,
+    payload: {
+      isServer: isServer
+    }
   };
 };
 
-export function loadStationsSuccess(stations: StationModel[]) : StationAction {
+export function loadStationsSuccess(stations: StationModel[]) : StationsAction {
   return {
     type: LOAD_STATIONS_SUCCESS,
     payload: stations

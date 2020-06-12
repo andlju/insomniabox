@@ -1,19 +1,10 @@
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
-import { useStore } from '../store';
-import { loadStations, startLoadingStations } from '../components/stations/stations.actions';
+import { wrapper } from '../store';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const store = useStore(pageProps.initialReduxState);
-  
-  return (
-    <>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </>
-  );
+const MyApp = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

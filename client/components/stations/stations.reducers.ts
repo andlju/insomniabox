@@ -1,5 +1,5 @@
 import { StationsState } from './stations.model';
-import { StationAction, LOAD_STATIONS, LOAD_STATIONS_SUCCESS } from './stations.actions';
+import { StationsAction, LOAD_STATIONS, LOAD_STATIONS_SUCCESS } from './stations.actions';
 
 const initialState: StationsState = {
   loading: false,
@@ -8,7 +8,7 @@ const initialState: StationsState = {
 
 export function stationsReducer(
   state = initialState,
-  action: StationAction
+  action: StationsAction
 ): StationsState {
   switch (action.type) {
     case LOAD_STATIONS:
