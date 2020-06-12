@@ -3,7 +3,7 @@ GET http://localhost:3001/tube/stations?name=Mälarhöjden
 Accept: application/json
 
 ### Get metro
-GET http://localhost:3001/tube/stations/9262/realtime
+GET http://localhost:3001/tube/stations/9290/realtime
 Accept: application/json
 
 ### Test

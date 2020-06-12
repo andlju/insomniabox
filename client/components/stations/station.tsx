@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, IconButton, Typography } from '@material-ui/core';
+import { Card, CardContent, CardHeader, IconButton, Table, TableBody, TableRow, TableCell, Typography } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
 import { StationsState, StationModel } from './stations.model';
@@ -15,7 +15,7 @@ const useStation = (stationId) => {
 };
 
 export default function Station({ stationId }: StationProps) {
-  const { name, direction } = useStation(stationId);
+  const { name, direction, realtimeInfo } = useStation(stationId);
 
   return (
     <Card>
@@ -29,9 +29,19 @@ export default function Station({ stationId }: StationProps) {
         subheader={direction}
       />
       <CardContent>
-        <Typography>
-          Hej hej
-        </Typography>
+        {realtimeInfo ?
+          (<Table>
+            <TableBody>
+              {
+                realtimeInfo.journeys.map(j => (
+                  <TableRow key={j.journeyId}>
+                    <TableCell>{j.displayTime}</TableCell>
+                    <TableCell>{j.destination}</TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>) : <Typography>Loading</Typography>}
       </CardContent>
     </Card>
   );
