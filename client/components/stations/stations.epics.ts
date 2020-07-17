@@ -15,8 +15,8 @@ const realtimeLoaderEpic: Epic<StationsAction, StationsAction, RootState> = (act
   withLatestFrom(state$),
   tap(dbg => console.log(dbg)),
   mergeMap(([action, state]) => from(state.stations.stations).pipe(
-    mergeMap((st) => interval(5000).pipe(
-      map(() => loadRealtimeInfo(true, st.stationId))
+    mergeMap((st) => interval(15000).pipe(
+      map(() => loadRealtimeInfo(false, st.stationId))
     ))    
   )));
 

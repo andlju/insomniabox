@@ -15,7 +15,7 @@ const useStation = (stationId) => {
 };
 
 export default function Station({ stationId }: StationProps) {
-  const { name, direction, realtimeInfo } = useStation(stationId);
+  const { name, direction, defaultDirectionId: directionId, realtimeInfo } = useStation(stationId);
 
   return (
     <Card>
@@ -29,11 +29,11 @@ export default function Station({ stationId }: StationProps) {
         subheader={direction}
       />
       <CardContent>
-        {realtimeInfo ?
+        {realtimeInfo?.journeys ?
           (<Table>
             <TableBody>
               {
-                realtimeInfo.journeys.map(j => (
+                realtimeInfo.journeys.filter(j => j.directionId === directionId).map(j => (
                   <TableRow key={j.journeyId}>
                     <TableCell>{j.displayTime}</TableCell>
                     <TableCell>{j.destination}</TableCell>

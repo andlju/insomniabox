@@ -1,3 +1,10 @@
+import axios from "axios";
+
+const SL_STATIONS_KEY = process.env.SL_STATIONS_KEY;
+const SL_REALTIME_KEY = process.env.SL_REALTIME_KEY;
+
+const SL_STATIONS_URL = `https://api.sl.se/api2/typeahead.json?key=${SL_STATIONS_KEY}&stationsonly=True&maxresults=5`;
+const SL_REALTIME_URL = `https://api.sl.se/api2/realtimedeparturesV4.json?key=${SL_REALTIME_KEY}&timewindow=30`;
 
 export const realtimeSample = {
   "Station": {
@@ -59,8 +66,15 @@ export const realtimeSample = {
   }
 };
 
-export default (req, res) => {
+export default async (req, res) => {
   res.statusCode = 200
-
-  res.json(realtimeSample);
-}
+  console.log("Getting realtime info on server");
+  const stationId = req.query.stationId;
+  try {
+    const resp = await axios.get(SL_REALTIME_URL + `&siteId=${stationId}`);
+    res.json({ Station: resp.data.ResponseData });
+  } catch (error) {
+    console.log('Error', error);
+    res.json(error);
+  }
+};

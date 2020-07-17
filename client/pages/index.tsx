@@ -3,7 +3,7 @@ import { CssBaseline, Grid, makeStyles } from '@material-ui/core';
 import Station from '../components/stations/station';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { useEffect } from 'react';
-import { startLoadingStations, stopLoadingStations, loadStations } from '../components/stations/stations.actions';
+import { startLoadingRealtime, stopLoadingRealtime, loadStations } from '../components/stations/stations.actions';
 import { RootState, wrapper } from '../store';
 import { NextPage } from 'next';
 import { bindActionCreators } from 'redux';
@@ -30,9 +30,9 @@ function Home() {
 
   const stationIds = useAllStationIds();
   useEffect(() => {
-    dispatch(startLoadingStations());
+    dispatch(startLoadingRealtime());
     return () => {
-      dispatch(stopLoadingStations());
+      dispatch(stopLoadingRealtime());
     }
   }, [dispatch]);
   

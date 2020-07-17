@@ -46,19 +46,19 @@ export interface LoadRealtimeInfoSuccessAction {
 
 export type StationsAction = LoadStationsAction | LoadStationsSuccessAction | StartLoadingRealtimeAction | StopLoadingRealtimeAction | LoadRealtimeInfoAction | LoadRealtimeInfoSuccessAction;
 
-export function startLoadingStations(): StationsAction {
+export function startLoadingRealtime(): StartLoadingRealtimeAction {
   return {
     type: START_LOADING_REALTIME
   }
 };
 
-export function stopLoadingStations(): StationsAction {
+export function stopLoadingRealtime(): StopLoadingRealtimeAction {
   return {
     type: STOP_LOADING_REALTIME
   }
 };
 
-export function loadStations(isServer: boolean) : StationsAction {
+export function loadStations(isServer: boolean) : LoadStationsAction {
   return {
     type: LOAD_STATIONS,
     payload: {
@@ -67,14 +67,14 @@ export function loadStations(isServer: boolean) : StationsAction {
   };
 };
 
-export function loadStationsSuccess(stations: StationModel[]) : StationsAction {
+export function loadStationsSuccess(stations: StationModel[]) : LoadStationsSuccessAction {
   return {
     type: LOAD_STATIONS_SUCCESS,
     payload: stations
   };
 };
 
-export function loadRealtimeInfo(isServer: boolean, stationId: string) : StationsAction {
+export function loadRealtimeInfo(isServer: boolean, stationId: string) : LoadRealtimeInfoAction {
   return {
     type: LOAD_REALTIME_INFO,
     payload: {
@@ -84,7 +84,7 @@ export function loadRealtimeInfo(isServer: boolean, stationId: string) : Station
   };
 };
 
-export function loadRealtimeInfoSuccess(stationId: string, realtimeInfo: RealtimeInfoModel) : StationsAction {
+export function loadRealtimeInfoSuccess(stationId: string, realtimeInfo: RealtimeInfoModel) : LoadRealtimeInfoSuccessAction {
   return {
     type: LOAD_REALTIME_INFO_SUCCESS,
     payload: {

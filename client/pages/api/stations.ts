@@ -4,19 +4,23 @@ export const stationsSample = {
   "Stations": [
     {
       "Name": "Hägerstensåsen",
-      "StationId": "1337"
+      "StationId": "9262",
+      "DefaultJourneyDirection": 1
     },
     {
       "Name": "Axelsberg",
-      "StationId": "1338"
+      "StationId": "9291",
+      "DefaultJourneyDirection": 1
     },
     {
       "Name": "Västertorp",
-      "StationId": "1437"
+      "StationId": "9261",
+      "DefaultJourneyDirection": 2
     },
     {
       "Name": "Mälarhöjden",
-      "StationId": "1438"
+      "StationId": "9290",
+      "DefaultJourneyDirection": 2
     }
   ]
 };
