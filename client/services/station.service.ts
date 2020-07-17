@@ -1,13 +1,14 @@
 import { StationModel } from "../components/stations/stations.model";
 import { request } from "universal-rxjs-ajax";
 import { map, tap } from "rxjs/operators";
-import { stationsSample } from "../pages/api/stations";
-import { of, Observable } from "rxjs";
-import { realtimeSample } from "../pages/api/station/[stationId]/realtime";
+import { configSample } from "../pages/api/config";
+import { getStationRealtime } from "../pages/api/stations/[stationId]/realtime";
+
+import { of, Observable, defer } from "rxjs";
 
 export function getStationsApi(isServer: boolean) {
   console.log(`Getting stations. isServer: ${isServer}`);
-  const rawStations$: Observable<any> = isServer ? of({ response: stationsSample }) : request({ url: `/api/stations` });
+  const rawStations$: Observable<any> = isServer ? of({ response: configSample }) : request({ url: `/api/config` });
   return rawStations$.pipe(
     tap(resp => console.log(resp)),
     map(resp => resp.response.Stations.map(s => {
@@ -17,9 +18,9 @@ export function getStationsApi(isServer: boolean) {
 
 export function getRealtimeApi(stationId: string, isServer: boolean) {
   console.log(`Getting realtimeInfo. isServer: ${isServer}`);
-  const rawStations$: Observable<any> = isServer ? of({ response: realtimeSample }) : request({ url: `/api/station/${stationId}/realtime` });
+  const rawStations$: Observable<any> = isServer ? defer(() => { response: getStationRealtime(stationId) }) : request({ url: `/api/stations/${stationId}/realtime` });
   return rawStations$.pipe(
-    tap(resp => console.log(resp)),
+    tap(resp => console.log("Station realtime info returned:", resp)),
     map(resp => {
       return {
         journeys: resp.response.Station?.Metros.map(m => {

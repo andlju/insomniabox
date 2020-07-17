@@ -2,6 +2,8 @@ import { StationModel, StationsState, RealtimeInfoModel } from "./stations.model
 
 export const START_LOADING_REALTIME = 'START_LOADING_REALTIME';
 export const STOP_LOADING_REALTIME = 'STOP_LOADING_REALTIME';
+export const REFRESH_REALTIME = 'REFRESH_REALTIME';
+
 export const LOAD_STATIONS = 'LOAD_STATIONS';
 export const LOAD_STATIONS_SUCCESS = 'LOAD_STATIONS_SUCCESS';
 
@@ -16,6 +18,10 @@ export interface StopLoadingRealtimeAction {
   type: typeof STOP_LOADING_REALTIME
 };
 
+export interface RefreshRealtimeAction {
+  type: typeof REFRESH_REALTIME
+};
+
 export interface LoadStationsAction {
   type: typeof LOAD_STATIONS,
   payload: {
@@ -25,7 +31,10 @@ export interface LoadStationsAction {
 
 export interface LoadStationsSuccessAction {
   type: typeof LOAD_STATIONS_SUCCESS,
-  payload: StationModel[]
+  payload: {
+    isServer: boolean,
+    stations: StationModel[]
+  }
 };
 
 export interface LoadRealtimeInfoAction {
@@ -44,7 +53,7 @@ export interface LoadRealtimeInfoSuccessAction {
   }
 };
 
-export type StationsAction = LoadStationsAction | LoadStationsSuccessAction | StartLoadingRealtimeAction | StopLoadingRealtimeAction | LoadRealtimeInfoAction | LoadRealtimeInfoSuccessAction;
+export type StationsAction = LoadStationsAction | LoadStationsSuccessAction | StartLoadingRealtimeAction | StopLoadingRealtimeAction | RefreshRealtimeAction | LoadRealtimeInfoAction | LoadRealtimeInfoSuccessAction;
 
 export function startLoadingRealtime(): StartLoadingRealtimeAction {
   return {
@@ -58,6 +67,12 @@ export function stopLoadingRealtime(): StopLoadingRealtimeAction {
   }
 };
 
+export function refreshRealtime(): RefreshRealtimeAction {
+  return {
+    type: REFRESH_REALTIME
+  }
+};
+
 export function loadStations(isServer: boolean) : LoadStationsAction {
   return {
     type: LOAD_STATIONS,
@@ -67,10 +82,13 @@ export function loadStations(isServer: boolean) : LoadStationsAction {
   };
 };
 
-export function loadStationsSuccess(stations: StationModel[]) : LoadStationsSuccessAction {
+export function loadStationsSuccess(isServer: boolean, stations: StationModel[]) : LoadStationsSuccessAction {
   return {
     type: LOAD_STATIONS_SUCCESS,
-    payload: stations
+    payload: {
+      isServer,
+      stations,
+    }
   };
 };
 

@@ -19,7 +19,7 @@ export function stationsReducer(
     case LOAD_STATIONS_SUCCESS:
       return {
         loading: false,
-        stations: action.payload
+        stations: action.payload.stations
       };
     case LOAD_REALTIME_INFO_SUCCESS:
       return {

@@ -1,7 +1,7 @@
 import { ofType, combineEpics, Epic } from 'redux-observable';
 import { request } from 'universal-rxjs-ajax';
 import { map, mergeMap, tap, takeUntil, filter, withLatestFrom } from 'rxjs/operators';
-import { LOAD_STATIONS, loadStationsSuccess, START_LOADING_REALTIME, STOP_LOADING_REALTIME, loadStations, LoadStationsAction, StationsAction, loadRealtimeInfo, LOAD_REALTIME_INFO, loadRealtimeInfoSuccess, StartLoadingRealtimeAction } from './stations.actions';
+import { LOAD_STATIONS, loadStationsSuccess, START_LOADING_REALTIME, STOP_LOADING_REALTIME, loadStations, LoadStationsAction, StationsAction, loadRealtimeInfo, LOAD_REALTIME_INFO, loadRealtimeInfoSuccess, StartLoadingRealtimeAction, LOAD_STATIONS_SUCCESS, LoadStationsSuccessAction, RefreshRealtimeAction, REFRESH_REALTIME } from './stations.actions';
 import { interval, Observable, of, from } from 'rxjs';
 import { getStationsApi, getRealtimeApi } from '../../services/station.service';
 import { StationModel } from './stations.model';
@@ -17,15 +17,22 @@ const realtimeLoaderEpic: Epic<StationsAction, StationsAction, RootState> = (act
   mergeMap(([action, state]) => from(state.stations.stations).pipe(
     mergeMap((st) => interval(15000).pipe(
       map(() => loadRealtimeInfo(false, st.stationId))
-    ))    
+    ))
   )));
 
-const loadStationsEpic = (action$) => action$.pipe(
-  ofType(LOAD_STATIONS),
-  mergeMap<any, any>(action =>
+const loadStationsEpic: Epic<StationsAction, StationsAction, RootState> = (action$) => action$.pipe(
+  ofType<LoadStationsAction>(LOAD_STATIONS),
+  mergeMap(action =>
     getStationsApi(action.payload.isServer).pipe(
-      map(stations => loadStationsSuccess(stations))
+      map(stations => loadStationsSuccess(action.payload.isServer, stations))
     )));
+
+const refreshRealtimeEpic: Epic<StationsAction, StationsAction, RootState> = (action$, state$) => action$.pipe(
+  ofType<RefreshRealtimeAction>(REFRESH_REALTIME),
+  withLatestFrom(state$),
+  mergeMap(([action, state]) => from(state.stations.stations).pipe(
+    map(st => loadRealtimeInfo(false, st.stationId)
+    ))));
 
 const loadRealtimeEpic = (action$, state) => action$.pipe(
   ofType(LOAD_REALTIME_INFO),
@@ -35,6 +42,6 @@ const loadRealtimeEpic = (action$, state) => action$.pipe(
     )
   ));
 
-const stationsEpic = combineEpics(realtimeLoaderEpic, loadStationsEpic, loadRealtimeEpic);
+const stationsEpic = combineEpics(realtimeLoaderEpic, loadStationsEpic, loadRealtimeEpic, refreshRealtimeEpic);
 
 export default stationsEpic;
