@@ -7,7 +7,8 @@ import { startLoadingRealtime, stopLoadingRealtime, loadStations, refreshRealtim
 import { RootState, wrapper } from '../store';
 import { NextPage } from 'next';
 import { bindActionCreators } from 'redux';
-import { getAllStationIds } from '../components/stations/stations.selectors';
+import { getAllStations } from '../components/stations/stations.selectors';
+import { StationModel } from '../components/stations/stations.model';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useAllStationIds = () => {
-  return useSelector<RootState, string[]>(getAllStationIds());
+const useAllStations = () => {
+  return useSelector<RootState, StationModel[]>(getAllStations());
 };
 
 
@@ -28,7 +29,7 @@ function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const stationIds = useAllStationIds();
+  const stations = useAllStations();
   useEffect(() => {
     dispatch(refreshRealtime());
     dispatch(startLoadingRealtime());
@@ -47,9 +48,9 @@ function Home() {
       <CssBaseline />
 
       <Grid container spacing={2} className={classes.grid}>
-        {stationIds.map(s =>
-          (<Grid item xs={6} md={3} key={s}>
-            <Station stationId={s} />
+        {stations.map(s =>
+          (<Grid item xs={6} md={3} key={s.stationId}>
+            <Station stationId={s.stationId} />
           </Grid>)
         )}
       </Grid>

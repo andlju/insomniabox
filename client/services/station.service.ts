@@ -7,20 +7,17 @@ import { getStationRealtime } from "../pages/api/stations/[stationId]/realtime";
 import { of, Observable, defer } from "rxjs";
 
 export function getStationsApi(isServer: boolean) {
-  console.log(`Getting stations. isServer: ${isServer}`);
   const rawStations$: Observable<any> = isServer ? of({ response: configSample }) : request({ url: `/api/config` });
   return rawStations$.pipe(
     tap(resp => console.log(resp)),
     map(resp => resp.response.Stations.map(s => {
-      return { stationId: s.StationId, name: s.Name, defaultDirectionId: s.DefaultJourneyDirection, direction: s.DefaultJourneyDirection === 1 ? "Norrut" : "Söderut" }
+      return { stationId: s.StationId, name: s.Name, siteId: s.SiteId, defaultDirectionId: s.DefaultJourneyDirection, direction: s.DefaultJourneyDirection === 1 ? "Norrut" : "Söderut" }
     })));
 };
 
-export function getRealtimeApi(stationId: string, isServer: boolean) {
-  console.log(`Getting realtimeInfo. isServer: ${isServer}`);
-  const rawStations$: Observable<any> = isServer ? defer(() => { response: getStationRealtime(stationId) }) : request({ url: `/api/stations/${stationId}/realtime` });
+export function getRealtimeApi(siteId: string, isServer: boolean) {
+  const rawStations$: Observable<any> = isServer ? defer(() => { response: getStationRealtime(siteId) }) : request({ url: `/api/stations/${siteId}/realtime` });
   return rawStations$.pipe(
-    tap(resp => console.log("Station realtime info returned:", resp)),
     map(resp => {
       return {
         journeys: resp.response.Station?.Metros.map(m => {

@@ -8,7 +8,9 @@ export interface StationModel {
   stationId: string,
   name: string,
   direction: string,
+  siteId: string,
   defaultDirectionId: number,
+  minuteMargin: number,
   realtimeInfo: RealtimeInfoModel
 };
 

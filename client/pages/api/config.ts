@@ -3,24 +3,32 @@
 export const configSample = {
   "Stations": [
     {
+      "StationId": "1",
       "Name": "Hägerstensåsen",
-      "StationId": "9262",
-      "DefaultJourneyDirection": 1
+      "SiteId": "9262",
+      "DefaultJourneyDirection": 1,
+      "MinuteMargin": 6
     },
     {
+      "StationId": "2",
       "Name": "Axelsberg",
-      "StationId": "9291",
-      "DefaultJourneyDirection": 1
+      "SiteId": "9291",
+      "DefaultJourneyDirection": 1,
+      "MinuteMargin": 9
     },
     {
-      "Name": "Västertorp",
-      "StationId": "9261",
-      "DefaultJourneyDirection": 2
+      "StationId": "3",
+      "Name": "Hägerstensåsen",
+      "SiteId": "9262",
+      "DefaultJourneyDirection": 2,
+      "MinuteMargin": 9
     },
     {
+      "StationId": "4",
       "Name": "Mälarhöjden",
-      "StationId": "9290",
-      "DefaultJourneyDirection": 2
+      "SiteId": "9290",
+      "DefaultJourneyDirection": 2,
+      "MinuteMargin": 8
     }
   ]
 };

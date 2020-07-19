@@ -41,14 +41,14 @@ export interface LoadRealtimeInfoAction {
   type: typeof LOAD_REALTIME_INFO,
   payload: {
     isServer: boolean,
-    stationId: string
+    siteId: string
   }
 };
 
 export interface LoadRealtimeInfoSuccessAction {
   type: typeof LOAD_REALTIME_INFO_SUCCESS,
   payload: {
-    stationId: string
+    siteId: string
     realtimeInfo: RealtimeInfoModel
   }
 };
@@ -92,21 +92,21 @@ export function loadStationsSuccess(isServer: boolean, stations: StationModel[])
   };
 };
 
-export function loadRealtimeInfo(isServer: boolean, stationId: string) : LoadRealtimeInfoAction {
+export function loadRealtimeInfo(isServer: boolean, siteId: string) : LoadRealtimeInfoAction {
   return {
     type: LOAD_REALTIME_INFO,
     payload: {
       isServer: isServer,
-      stationId: stationId
+      siteId: siteId
     }
   };
 };
 
-export function loadRealtimeInfoSuccess(stationId: string, realtimeInfo: RealtimeInfoModel) : LoadRealtimeInfoSuccessAction {
+export function loadRealtimeInfoSuccess(siteId: string, realtimeInfo: RealtimeInfoModel) : LoadRealtimeInfoSuccessAction {
   return {
     type: LOAD_REALTIME_INFO_SUCCESS,
     payload: {
-      stationId: stationId,
+      siteId: siteId,
       realtimeInfo: realtimeInfo
     }
   };

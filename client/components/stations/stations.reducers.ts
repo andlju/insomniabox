@@ -24,7 +24,7 @@ export function stationsReducer(
     case LOAD_REALTIME_INFO_SUCCESS:
       return {
         ...state,
-        stations: state.stations.map(station => station.stationId === action.payload.stationId ? {
+        stations: state.stations.map(station => station.siteId === action.payload.siteId ? {
           ...station,
           realtimeInfo: action.payload.realtimeInfo
         } : station)
