@@ -15,7 +15,9 @@ export interface StationModel {
 };
 
 export interface RealtimeInfoModel {
-  journeys: JourneyModel[]
+  journeys: JourneyModel[],
+  preferred?: JourneyModel,
+  loading: boolean
 };
 
 export interface JourneyModel {
@@ -23,5 +25,6 @@ export interface JourneyModel {
   destination: string,
   displayTime: string,
   lineNumber: string,
-  directionId: number
+  directionId: number,
+  expectedDateTime: Date
 };

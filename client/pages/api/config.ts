@@ -21,7 +21,7 @@ export const configSample = {
       "Name": "Hägerstensåsen",
       "SiteId": "9262",
       "DefaultJourneyDirection": 2,
-      "MinuteMargin": 9
+      "MinuteMargin": 6
     },
     {
       "StationId": "4",

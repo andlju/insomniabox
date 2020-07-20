@@ -12,7 +12,6 @@ import { StationModel } from '../components/stations/stations.model';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.text.secondary,
   },
   grid: {
     padding: theme.spacing(2),
@@ -37,7 +36,7 @@ function Home() {
       dispatch(stopLoadingRealtime());
     }
   }, [dispatch]);
-  
+
   return (
     <div className={classes.root}>
       <Head>
@@ -46,13 +45,18 @@ function Home() {
       </Head>
 
       <CssBaseline />
-
-      <Grid container spacing={2} className={classes.grid}>
-        {stations.map(s =>
-          (<Grid item xs={6} md={3} key={s.stationId}>
-            <Station stationId={s.stationId} />
-          </Grid>)
-        )}
+      <Grid container>
+        <Grid item md={false} lg={2}></Grid>
+        <Grid item md={12} lg={8}>
+          <Grid container spacing={2} className={classes.grid}>
+            {stations.map(s =>
+              (<Grid item xs={12} md={6} key={s.stationId}>
+                <Station stationId={s.stationId} />
+              </Grid>)
+            )}
+          </Grid>
+        </Grid>
+        <Grid item md={false} lg={2}></Grid>
       </Grid>
     </div>
   )

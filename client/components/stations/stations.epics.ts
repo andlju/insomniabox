@@ -9,6 +9,7 @@ import { getAllStationIds } from './stations.selectors';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { RootState } from '../../store';
 
+// 
 const realtimeLoaderEpic: Epic<StationsAction, StationsAction, RootState> = (action$, state$) => action$.pipe(
   ofType<StartLoadingRealtimeAction>(START_LOADING_REALTIME),
   withLatestFrom(state$),
